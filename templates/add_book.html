@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Добавить книгу</h1>
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.autor_name.label }}<br>
+        {{ form.autor_name(class="form-control", type="autor_name") }}<br>
+        {% for error in form.autor_name.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.book_name.label }}<br>
+        {{ form.book_name(class="form-control", type="book_name") }}<br>
+        {% for error in form.book_name.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.vid_izd.label }}<br>
+        {{ form.vid_izd(class="form-control", type="vid_izd") }}<br>
+        {% for error in form.vid_izd.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.ISBN.label }}<br>
+        {{ form.ISBN(class="form-control", type="ISBN") }}<br>
+        {% for error in form.ISBN.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.tip_perep.label }}<br>
+        {{ form.tip_perep(class="form-control", type="tip_perep") }}<br>
+        {% for error in form.tip_perep.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.kol_str.label }}<br>
+        {{ form.kol_str(class="form-control", type="kol_str") }}<br>
+        {% for error in form.kol_str.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.format.label }}<br>
+        {{ form.format(class="form-control") }}<br>
+        {% for error in form.format.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.tirazh.label }}<br>
+        {{ form.tirazh(class="form-control", type="tirazh") }}<br>
+        {% for error in form.tirazh.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.data_izg.label }}<br>
+        {{ form.data_izg(class="form-control datepicker") }}<br>
+        {% for error in form.data_izg.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.god_izd.label }}<br>
+        {{ form.god_izd(class="form-control", type="god_izd") }}<br>
+        {% for error in form.god_izd.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.status.label }}<br>
+        {{ form.status(class="form-control", type="status") }}<br>
+        {% for error in form.status.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.stoim.label }}<br>
+        {{ form.stoim(class="form-control", type="stoim") }}<br>
+        {% for error in form.stoim.errors %}
+            <p class="alert alert-danger" role="alert">
+                {{ error }}
+            </p>
+        {% endfor %}
+    </p>
+    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    {{message}}
+</form>
+{% endblock %}

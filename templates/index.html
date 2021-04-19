@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="POST" action="/" class="form-control">
+    <div>
+        <p>
+            {% if search_flag == 'Номер заказа' %}
+                <select class="form-select form-select width-fix" name="search" id="search" aria-label="form-select">
+                    <option disabled>Поиск по</option>
+                    <option value="Номер заказа" selected>Номеру заказа</option>
+                    <option value="Автор">Автору</option>
+                    <option value="Название издания">Название издания</option>
+                    <option value="Дата">Дате</option>
+                </select>
+            {% elif search_flag == 'Автор' %}
+                <select class="form-select form-select width-fix" name="search" id="search" aria-label="form-select">
+                    <option disabled>Поиск по</option>
+                    <option value="Номер заказа">Номеру заказа</option>
+                    <option value="Автор" selected>Автору</option>
+                    <option value="Название издания">Название издания</option>
+                    <option value="Дата">Дате</option>
+                </select>
+            {% elif search_flag == 'Название издания' %}
+                <select class="form-select form-select width-fix" name="search" id="search" aria-label="form-select">
+                    <option disabled>Поиск по</option>
+                    <option value="Номер заказа">Номеру заказа</option>
+                    <option value="Автор">Автору</option>
+                    <option value="Название издания" selected>Название издания</option>
+                    <option value="Дата">Дате</option>
+                </select>
+            {% elif search_flag == 'Дата' %}
+                <select class="form-select form-select width-fix" name="search" id="search" aria-label="form-select">
+                    <option disabled>Поиск по</option>
+                    <option value="Номер заказа">Номеру заказа</option>
+                    <option value="Автор">Автору</option>
+                    <option value="Название издания">Название издания</option>
+                    <option value="Дата" selected>Дате</option>
+                </select>
+            {% else %}
+                <select class="form-select form-select width-fix" name="search" id="search" aria-label="form-select">
+                    <option disabled selected>Поиск по</option>
+                    <option value="Номер заказа">Номеру заказа</option>
+                    <option value="Автор">Автору</option>
+                    <option value="Название издания">Название издания</option>
+                    <option value="Дата">Дате</option>
+                </select>
+            {% endif %}
+        </p>
+        {% if text %}
+            <p><input type="text" name="text" value="{{text}}" class="form-control input-group mb-3 width-fix"></p>
+        {% else %}
+            <p><input type="text" name="text" class="form-control input-group mb-3 width-fix"></p>
+        {% endif %}
+    </div>
+    <div>
+        <p>
+            <input type="date" name="date_from" value="2000-01-01">
+            <input type="date" name="date_to" value="2021-01-01">
+        </p>
+    </div>
+    <p>
+    <div class="form-check form-check-inline">
+        {% if 'Монография' in flags %}
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Монография" name="flags"
+            checked>
+        {% else %}
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Монография" name="flags">
+        {% endif %}
+        <label class="form-check-label" for="inlineCheckbox1">Монография</label>
+    </div>
+    <div class="form-check form-check-inline">
+        {% if 'Учебное пособие' in flags %}
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Учебное пособие" name="flags"
+            checked>
+        {% else %}
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Учебное пособие"
+                   name="flags">
+        {% endif %}
+        <label class="form-check-label" for="inlineCheckbox2">Учебное пособие</label>
+    </div>
+    <div class="form-check form-check-inline">
+        {% if 'Методичка' in flags %}
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="Методичка" name="flags"
+            checked>
+        {% else %}
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="Методичка" name="flags">
+        {% endif %}
+        <label class="form-check-label" for="inlineCheckbox3">Методичка</label>
+    </div>
+    <div class="form-check form-check-inline">
+        {% if 'Сборник' in flags %}
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="Сборник" name="flags"
+            checked>
+        {% else %}
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="Сборник" name="flags">
+        {% endif %}
+        <label class="form-check-label" for="inlineCheckbox4">Сборник</label>
+    </div>
+    <div class="form-check form-check-inline">
+        {% if 'Периодика' in flags %}
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="Периодика" name="flags"
+            checked>
+        {% else %}
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="Периодика" name="flags">
+        {% endif %}
+        <label class="form-check-label" for="inlineCheckbox5">Периодика</label>
+    </div>
+    <div class="form-check form-check-inline">
+        {% if 'Прочее' in flags %}
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="Прочее" name="flags"
+            checked>
+        {% else %}
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="Прочее" name="flags">
+        {% endif %}
+        <label class="form-check-label" for="inlineCheckbox6">Прочее</label>
+    </div>
+    </p>
+    <p><input type="submit" class="btn btn-primary"></p>
+</form>
+<nav class="right mt-4">
+    <p><a class="btn btn-primary" href="/add_book">Добавить книгу</a></p>
+</nav>
+<table class="table table-bordered">
+    <thead>
+        <tr class="table-secondary">
+            <th scope="col">№ Заказа</th>
+            <th scope="col">Авторы</th>
+            <th scope="col">Название книги</th>
+            <th scope="col">Вид изд.</th>
+            <th scope="col">ISBN</th>
+            <th scope="col">Тип переплета</th>
+            <th scope="col">Кол. стр.</th>
+            <th scope="col">Формат</th>
+            <th scope="col">Тираж</th>
+            <th scope="col">Дата изг.</th>
+            <th scope="col">Год изд.</th>
+            <th scope="col">Статус изд.</th>
+            <th scope="col">Стоимость изд.</th>
+            <th scope="col">Действие</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+            <tr class="table-light">
+                <th scope="row">{{book.Nom_zak}}</th>
+                <td>{{book.autor_name}}</td>
+                <td>{{book.book_name}}</td>
+                <td>{{book.vid_izd}}</td>
+                {% if book.ISBN %}
+                    <td>{{book.ISBN}}</td>
+                {% else %}
+                    <td>Отсутствует</td>
+                {% endif %}
+                <td>{{book.tip_perep}}</td>
+                <td>{{book.kol_str}}</td>
+                <td>{{book.format}}</td>
+                <td>{{book.tirazh}}</td>
+                <td>{{book.data_izg.day}}.{{book.data_izg.month}}.{{book.data_izg.year}}</td>
+                <td>{{book.god_izd}}</td>
+                <td>{{book.status}}</td>
+                <td>{{book.stoim / 100}}</td>
+                <td>
+                    <a href="/book/{{ book.Nom_zak }}" class="btn btn-primary">Изменить</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
