@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Выбрать авторов</h1>
+<nav class="right mt-4">
+    <p><a class="btn btn-primary" href="/add_author">Добавить автора</a></p>
+</nav>
+<form method="POST" class="form-control">
+    <table class="table table-bordered">
+        <thead>
+            <tr class="table-secondary">
+                <th scope="col">Автор</th>
+                <th scope="col">Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for author in authors %}
+                <tr class="table-light">
+                    <th scope="row">{{author.author_name}}</th>
+                    <td>
+                        <input type="checkbox" name="authors" value="{{ author.author_id }}">
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <input type="submit" class="btn btn-primary">
+</form>
+{% endblock %}

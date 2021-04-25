@@ -1,13 +1,18 @@
 from appvars import db
 
 
+association_table = db.Table('association',
+                             db.Column('author_id', db.Integer, db.ForeignKey('authors.author_id')),
+                             db.Column('nom_zak', db.Integer, db.ForeignKey('izd.Nom_zak')))
+
+
 class Izd(db.Model):
     def __repr__(self):
-        return f'{self.Nom_zak} nom zak|{self.author_id} author id|{self.book_id} book id'
+        return f'{self.Nom_zak}|{self.book_name}|{self.vid_id}|{self.perep_id}|{self.kol_str}|{self.format_id}|' \
+               f'{self.tirazh}|{self.data_izg}'
     __tablename__ = 'izd'
     Nom_zak = db.Column(db.Integer(), primary_key=True)
-    author_id = db.Column(db.Integer(), db.ForeignKey('authors.author_id'))
-    book_id = db.Column(db.Integer(), db.ForeignKey('books.book_id'))
+    book_name = db.Column(db.String(100))
     vid_id = db.Column(db.Integer(), db.ForeignKey('vidi_izd.vid_id'))
     ISBN = db.Column(db.String(100))
     perep_id = db.Column(db.Integer(), db.ForeignKey('tipi_perep.perep_id'))
@@ -18,11 +23,7 @@ class Izd(db.Model):
     god_izd = db.Column(db.String(40))
     status_id = db.Column(db.Integer(), db.ForeignKey('statusi.status_id'))
     stoim = db.Column(db.Integer())
-
-
-association_table = db.Table('association',
-                             db.Column('author_id', db.Integer, db.ForeignKey('authors.author_id')),
-                             db.Column('book_id', db.Integer, db.ForeignKey('books.book_id')))
+    authors = db.relationship('Authors', secondary=association_table, back_populates='izds')
 
 
 class Authors(db.Model):
@@ -31,18 +32,7 @@ class Authors(db.Model):
     __tablename__ = 'authors'
     author_id = db.Column(db.Integer(), primary_key=True)
     author_name = db.Column(db.String(100))
-    izd = db.relationship('Izd', backref='author')
-    books = db.relationship("Books", secondary=association_table, back_populates="authors")
-
-
-class Books(db.Model):
-    def __repr__(self):
-        return f'{self.book_id}|{self.book_name}'
-    __tablename__ = 'books'
-    book_id = db.Column(db.Integer(), primary_key=True)
-    book_name = db.Column(db.String(100))
-    izd = db.relationship('Izd', backref='book')
-    authors = db.relationship("Authors", secondary=association_table, back_populates="books")
+    izds = db.relationship("Izd", secondary=association_table, back_populates="authors")
 
 
 class VidiIzd(db.Model):

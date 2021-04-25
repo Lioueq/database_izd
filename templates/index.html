@@ -119,7 +119,7 @@
     <p><input type="submit" class="btn btn-primary"></p>
 </form>
 <nav class="right mt-4">
-    <p><a class="btn btn-primary" href="/add_book">Добавить книгу</a></p>
+    <p><a class="btn btn-primary" href="/add_izd">Добавить издание</a></p>
 </nav>
 <table class="table table-bordered">
     <thead>
@@ -141,27 +141,27 @@
         </tr>
     </thead>
     <tbody>
-        {% for book in books %}
+        {% for izd in izds %}
             <tr class="table-light">
-                <th scope="row">{{book.Nom_zak}}</th>
-                <td>{{book.autor_name}}</td>
-                <td>{{book.book_name}}</td>
-                <td>{{book.vid_izd}}</td>
-                {% if book.ISBN %}
-                    <td>{{book.ISBN}}</td>
+                <th scope="row">{{izd.Nom_zak}}</th>
+                <td>{{izd.authors}}</td>
+                <td>{{izd.book_name}}</td>
+                <td>{{izd.vid_izd.vid_name}}</td>
+                {% if izd.ISBN %}
+                    <td>{{izd.ISBN}}</td>
                 {% else %}
                     <td>Отсутствует</td>
                 {% endif %}
-                <td>{{book.tip_perep}}</td>
-                <td>{{book.kol_str}}</td>
-                <td>{{book.format}}</td>
-                <td>{{book.tirazh}}</td>
-                <td>{{book.data_izg.day}}.{{book.data_izg.month}}.{{book.data_izg.year}}</td>
-                <td>{{book.god_izd}}</td>
-                <td>{{book.status}}</td>
-                <td>{{book.stoim / 100}}</td>
+                <td>{{izd.tip_perep.perep_name}}</td>
+                <td>{{izd.kol_str}}</td>
+                <td>{{izd.format.format_name}}</td>
+                <td>{{izd.tirazh}}</td>
+                <td>{{izd.data_izg}}</td>
+                <td>{{izd.god_izd}}</td>
+                <td>{{izd.status.status_name}}</td>
+                <td>{{izd.stoim / 100}}</td>
                 <td>
-                    <a href="/book/{{ book.Nom_zak }}" class="btn btn-primary">Изменить</a>
+                    <a href="/book/{{ izd.Nom_zak }}" class="btn btn-primary">Изменить</a>
                 </td>
             </tr>
         {% endfor %}

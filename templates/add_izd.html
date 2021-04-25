@@ -5,15 +5,6 @@
 <form action="" method="post">
     {{ form.hidden_tag() }}
     <p>
-        {{ form.autor_name.label }}<br>
-        {{ form.autor_name(class="form-control", type="autor_name") }}<br>
-        {% for error in form.autor_name.errors %}
-            <p class="alert alert-danger" role="alert">
-                {{ error }}
-            </p>
-        {% endfor %}
-    </p>
-    <p>
         {{ form.book_name.label }}<br>
         {{ form.book_name(class="form-control", type="book_name") }}<br>
         {% for error in form.book_name.errors %}
@@ -21,6 +12,11 @@
                 {{ error }}
             </p>
         {% endfor %}
+    </p>
+    <p>
+        <form action="" method="post">
+            <input type="button" value="Добавить авторов">
+        </form>
     </p>
     <p>
         {{ form.vid_izd.label }}<br>
