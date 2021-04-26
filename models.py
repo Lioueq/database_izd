@@ -11,7 +11,7 @@ class Izd(db.Model):
         return f'{self.Nom_zak}|{self.book_name}|{self.vid_id}|{self.perep_id}|{self.kol_str}|{self.format_id}|' \
                f'{self.tirazh}|{self.data_izg}'
     __tablename__ = 'izd'
-    Nom_zak = db.Column(db.Integer(), primary_key=True)
+    Nom_zak = db.Column(db.Integer(), primary_key=True, auto_increment=True)
     book_name = db.Column(db.String(100))
     vid_id = db.Column(db.Integer(), db.ForeignKey('vidi_izd.vid_id'))
     ISBN = db.Column(db.String(100))
